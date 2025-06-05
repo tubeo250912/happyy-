@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sinh Nhật của em 😊</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('images/background.jpg') center/cover no-repeat fixed;
+      font-family: Arial, sans-serif;
+    }
+    .overlay {
+      backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.1);
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .login-box {
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 30px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      border: 2px solid white;
+    }
+    .title {
+      font-size: 20px;
+      color: white;
+      margin-bottom: 20px;
+    }
+    .input-display {
+      width: 160px;
+      height: 40px;
+      font-size: 24px;
+      margin: 0 auto 10px;
+      background: white;
+      border-radius: 10px;
+      padding: 5px;
+      letter-spacing: 5px;
+    }
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 50px);
+      gap: 10px;
+      justify-content: center;
+    }
+    .keypad button {
+      font-size: 20px;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      background-color: white;
+      cursor: pointer;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+    .shake {
+      animation: shake 0.3s;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      50% { transform: translateX(10px); }
+      75% { transform: translateX(-5px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="login-box" id="loginBox">
+      <img src="images/img4.jpg" alt="Avatar" class="avatar">
+      <div class="title">Sinh Nhật của em 😊</div>
+      <div class="input-display" id="passwordDisplay"> </div>
+      <div class="keypad">
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <button onclick="clearPassword()">❌</button>
+        <button onclick="appendNumber('0')">0</button>
+        <button onclick="checkPassword()">✔️</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let password = "";
+    const passwordDisplay = document.getElementById("passwordDisplay");
+    const loginBox = document.getElementById("loginBox");
+
+    function appendNumber(num) {
+      if (password.length < 6) {
+        password += num;
+        passwordDisplay.textContent = "*".repeat(password.length);
+      }
+    }
+
+    function clearPassword() {
+      password = "";
+      passwordDisplay.textContent = "";
+    }
+
+    function checkPassword() {
+      if (password === "1306") {
+        window.location.href = "main.html";
+      } else {
+        loginBox.classList.add("shake");
+        setTimeout(() => loginBox.classList.remove("shake"), 300);
+        clearPassword();
+      }
+    }
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chúc mừng sinh nhật</title>
+  <style>
+    body {
+      margin: 0;
+      background: pink;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .img {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 1.5s ease;
+    }
+    .img.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      width: 40px;
+      height: 60px;
+      background: radial-gradient(ellipse at center, #ff5db1 0%, #ef017c 100%);
+      border-radius: 20px 20px 20px 20px;
+      animation: floatUp 5s linear infinite;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-120vh); }
+    }
+    .gift-box {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 100px;
+      background: red;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+    .wish {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 28px;
+      color: white;
+      text-shadow: 2px 2px 5px #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <div class="wish">Chúc em sinh nhật thật vui vẻ và hạnh phúc! 💖</div>
+    <div class="gift-box" onclick="startExplosion()"></div>
+  </div>
+
+  <script>
+    const container = document.getElementById("container");
+    const heartPoints = [];
+    const total = 150;
+    const images = ["images/img1.jpg", "images/img2.jpg", "images/img3.jpg", "images/img4.jpg"];
+
+    for (let i = 0; i < 20; i++) {
+      const balloon = document.createElement("div");
+      balloon.className = "balloon";
+      balloon.style.left = Math.random() * 100 + "vw";
+      balloon.style.animationDelay = Math.random() * 5 + "s";
+      container.appendChild(balloon);
+    }
+
+    for (let t = 0; t < Math.PI * 2; t += Math.PI / total) {
+      const x = 16 * Math.pow(Math.sin(t), 3);
+      const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+      heartPoints.push({ x: x / 17, y: -y / 17 });
+    }
+
+    function startExplosion() {
+      heartPoints.forEach((point, i) => {
+        const img = document.createElement("img");
+        img.src = images[i % images.length];
+        img.className = "img";
+        container.appendChild(img);
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        img.style.left = centerX + "px";
+        img.style.top = centerY + "px";
+        setTimeout(() => {
+          const x = centerX + point.x * 300;
+          const y = centerY + point.y * 300;
+          img.style.left = `${x}px`;
+          img.style.top = `${y}px`;
+          img.classList.add("show");
+        }, i * 20);
+      });
+    }
+  </script>
+</body>
+</html>
